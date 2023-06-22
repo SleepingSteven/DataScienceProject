@@ -531,7 +531,7 @@ class GenericQueryProcessor (object):
                                 elif "canvas" in id:
                                     return Canvas(str(row[temp.columns.get_loc("id")]), str(temp_2["creator"].values[0]).split("; "), str(row[temp.columns.get_loc("label")]), str(temp_2["title"].values[0]))
                                 elif "annotation" in id:
-                                    return Annotation(str(temp_2["id"].values[0]), str(temp_2["motivation"].values[0]), str(temp_2["target"].values[0]), str(temp_2["body"].values[0]))
+                                    return Annotation(str(temp_2["id"].values[0]), str(temp_2["motivation"].values[0]), str(temp_2["target"].values[0]), Image(str(temp_2["body"].values[0])))
                                 elif "/full/" in id:
                                     return Image(str(temp_2["image_url"].values[0]))
                                 else: return None
@@ -556,7 +556,7 @@ class GenericQueryProcessor (object):
                         elif "canvas" in id:
                             return Canvas(str(temp_2.columns.get_loc("id")), str(temp_2["creator"].values[0]).split("; "), None, str(temp_2["title"].values[0]))
                         elif "annotation" in id:
-                            return Annotation(str(temp_2["id"].values[0]), str(temp_2["motivation"].values[0]), str(temp_2["target"].values[0]), str(temp_2["body"].values[0]))
+                            return Annotation(str(temp_2["id"].values[0]), str(temp_2["motivation"].values[0]), str(temp_2["target"].values[0]), Image(str(temp_2["body"].values[0])))
                         elif "/full/" in id:
                             return Image(str(temp_2["image_url"].values[0]))
                         else: return None
@@ -970,6 +970,9 @@ class Annotation(IdentifiableEntity):
     
     def getTarget(self):
         return self.target
+    
+    def getBody (self):
+        return self.body
     
 class Image(IdentifiableEntity):
     def __init__(self, id):
